@@ -21,12 +21,16 @@ class LineDestroyer {
 
 function checkFullLine(argBlock){
     var tmpDistroyLineFL = true;
+    $appHelper.resetDistroyedLineInfo();
     for (var j=$appHelper.firstLine; j<$appHelper.lastLine; j++){
         tmpDistroyLineFL = true;
         for (var i=$appHelper.firstColumn; i<$appHelper.lastColumn+1; i++){
             if (!argBlock[i][j].coverNr) tmpDistroyLineFL = false;
         }
-        if (tmpDistroyLineFL) distroyLine(argBlock, j);
+        if (tmpDistroyLineFL) {
+            distroyLine(argBlock, j);
+            $appHelper.addDistroyedLineInfo(j);
+        }
     }
 }
 

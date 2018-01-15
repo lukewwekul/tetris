@@ -17,6 +17,7 @@ class CameraController {
     check(){
         cameraMan();
         if ($focusShapeFL) testCamera();
+        else if($focusLineFL) focusLine();
         else cameraReturn();
     }
 
@@ -54,6 +55,13 @@ function cameraMan(){
     }
     if ($key.Up.isDown || $key.W.isDown){
         $focusShapeFL = false;
+    }
+
+
+    if ($appHelper.numberOfDestroyedLinesNow>0){
+        //console.log('camera distroy more one');
+        //shake(0.012, 3000);
+        lineCameraAction();
     }
 }
 
@@ -121,6 +129,23 @@ function focusShape(){
     zoomIn(3, 0.1, false);
     $game.camera.follow($shape.img);
 
+}
+
+
+
+function lineCameraAction(){
+    $game.camera.follow($block[6][$appHelper.distroyedLineNowPosY].cover);
+    $focusLineFL = true;
+    $game.time.events.add(1500, disableFocusLine);
+}
+
+function disableFocusLine(){
+    $focusLineFL = false;
+}
+
+function focusLine(){
+    rotation(0.05);
+    zoomIn(2, 0.5, true);
 }
 
 
