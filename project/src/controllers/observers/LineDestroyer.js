@@ -15,6 +15,10 @@ class LineDestroyer {
     check(argBlock){
         checkFullLine(argBlock);
     }
+
+    destroyAll(argBlock){
+        destroyAllLines(argBlock);
+    }
 }
 
 
@@ -44,6 +48,20 @@ function distroyLine(argBlock, argY){
         //$game.world.bringToTop(argBlock[k][argY].particle);
         //argBlock[k][argY].particle.frame = 7;
         argBlock[k][argY].particle.start(true, 3000, null, 1);
+    }
+}
+
+
+function destroyAllLines(argBlock){
+    for (var j=$appHelper.firstLine; j<$appHelper.lastLine+1; j++){
+        for (var i=$appHelper.firstColumn; i<$appHelper.lastColumn+1; i++){
+            if (argBlock[i][j].cover.frame) {
+                argBlock[i][j].particle.makeParticles('blocks', argBlock[i][j].coverNr);
+                argBlock[i][j].coverNr = 0;
+                argBlock[i][j].cover.frame = argBlock[i][j].coverNr;
+                argBlock[i][j].particle.start(true, 3000, null, 1);
+            }
+        }
     }
 }
 

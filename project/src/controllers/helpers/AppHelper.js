@@ -8,12 +8,15 @@ var $game, $configurations, $conf,
         shapeStartX: 0,     shapeStartY: 0,
         shapeMiddleX: 0,    shapeMiddleY: 0,
         numberOfShapes: 0,
-        blockArrHeight: 0
+        blockArrHeight: 0,  middleArrX: 0
     },
 
     $gameData = {
-        score: 0,   numberOfDestroyedLinesNow: 0,
-        distroyedLineNowPosY: 0
+        score: 0,
+        numberOfDestroyedLinesNow: 0,   distroyedLineNowPosY: 0,
+        numberOfDestroyedLinesInThisLvl: 0,
+        lvl: 1,   scoreThisLvl: 0, linesToNextLvl: 5,
+        shapeSpeed: 0
     };
 
 
@@ -37,11 +40,18 @@ class AppHelper {
 
     get numberOfShapes()            {return $appData.numberOfShapes; }
     get blockArrHeight()            {return $appData.blockArrHeight; }
+    get middleArrX()                {return $appData.middleArrX; }
 
 
     get numberOfDestroyedLinesNow() {return $gameData.numberOfDestroyedLinesNow; }
     get distroyedLineNowPosY()      {return $gameData.distroyedLineNowPosY; }
+    get numberOfDestroyedLinesInThisLvl()      {return $gameData.numberOfDestroyedLinesInThisLvl; }
+    get lvl()                       {return $gameData.lvl; }
+    get score()                     {return $gameData.score; }
+    get scoreThisLvl()              {return $gameData.scoreThisLvl; }
+    get linesToNextLvl()            {return $gameData.linesToNextLvl; }
 
+    get shapeSpeed()                {return $gameData.shapeSpeed; }
 
 
     constructor(game, configurations){
@@ -64,6 +74,7 @@ class AppHelper {
     addDistroyedLineInfo(argDistroyedLinePosY){
         $gameData.numberOfDestroyedLinesNow += 1;
         $gameData.distroyedLineNowPosY = argDistroyedLinePosY;
+        $gameData.numberOfDestroyedLinesInThisLvl += 1;
         console.log('number of distroyed line: ' + $gameData.numberOfDestroyedLinesNow);
         console.log('pos Y of distroyed line: ' + $gameData.distroyedLineNowPosY);
     }
@@ -71,6 +82,30 @@ class AppHelper {
     resetDistroyedLineInfo(){
         $gameData.numberOfDestroyedLinesNow = 0;
         $gameData.distroyedLineNowPosY = 0;
+    }
+
+    nextLvl(){
+        $gameData.lvl += 1;
+        $gameData.scoreThisLvl = 0;
+        $gameData.numberOfDestroyedLinesInThisLvl = 0;
+    }
+
+    setLinesToNextLvl(argHwMn){
+        $gameData.linesToNextLvl = argHwMn;
+    }
+
+    oddLinesToNextLvl(argHwMn){
+        $gameData.linesToNextLvl -= argHwMn;
+    }
+
+    addShapeSpeed(){
+        $gameData.shapeSpeed += $conf.shape.acceleratorSpeedLvl;
+    }
+
+    resetGame(){
+        $gameData.lvl = 1;
+        $gameData.score = 0;
+        $gameData.shapeSpeed = $conf.shape.firstLvlSpeed;
     }
 
 }
@@ -137,6 +172,9 @@ function calculateAppData(){
 
     $appData.blockArrHeight = $conf.game.rangeY + Math.floor($conf.shape.rangeY*1.5);
 
+    $appData.middleArrX = Math.floor(($conf.game.rangeX + 2*Math.floor($conf.shape.rangeX/2))/2);
+
+    $gameData.shapeSpeed = $conf.shape.firstLvlSpeed;
     /*console.log('$appData.firstLine: '+ $appData.firstLine);
     console.log('$appData.lastLine: '+ $appData.lastLine);
     console.log('$appData.firstColumn: '+ $appData.firstColumn);
@@ -146,7 +184,9 @@ function calculateAppData(){
     console.log('$appData.shapeMiddleX: '+ $appData.shapeMiddleX);
     console.log('$appData.shapeMiddleY: '+ $appData.shapeMiddleY);
     console.log('$appData.numberOfShapes: '+ $appData.numberOfShapes);
-    console.log('$appData.blockArrHeight: '+ $appData.blockArrHeight);*/
+    console.log('$appData.blockArrHeight: '+ $appData.blockArrHeight);
+    console.log('$appData.middleArrX: '+ $appData.middleArrX);
+    console.log('$gameData.shapeSpeed: '+ $gameData.shapeSpeed);*/
 }
 
 

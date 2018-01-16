@@ -27,7 +27,9 @@ var $game,
         rangeX: 5,      //odd number
         rangeY: 5,       //odd number
         fallSpeed: 400,  //ms
-        moveSpeed: 150,  //ms
+        moveSpeed: 150,  //ms, horizontal speed
+        firstLvlSpeed: 1,    //speed shape is fallSpeed/firstLvlSpeed
+        acceleratorSpeedLvl: 0.2 
     },
 
 
