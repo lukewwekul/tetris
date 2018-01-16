@@ -9,30 +9,39 @@ var $game, $configurations, $conf,
         shapeMiddleX: 0,    shapeMiddleY: 0,
         numberOfShapes: 0,
         blockArrHeight: 0
-    };
+    },
 
+    $gameData = {
+        score: 0,   numberOfDestroyedLinesNow: 0,
+        distroyedLineNowPosY: 0
+    };
 
 
 class AppHelper {
 
-    get settings()          { return $conf; }
-    get appData()           { return $appData; }
+    get settings()                  { return $conf; }
+    get appData()                   { return $appData; }
 
-    get shapesList()        { return $shapesList; }
-    get shapesListRotates() { return $shapesListRotates; }
+    get shapesList()                { return $shapesList; }
+    get shapesListRotates()         { return $shapesListRotates; }
 
-    get firstLine()         { return $appData.firstLine; }
-    get lastLine()          { return $appData.lastLine; }
-    get firstColumn()       { return $appData.firstColumn; }
-    get lastColumn()        { return $appData.lastColumn; }
+    get firstLine()                 { return $appData.firstLine; }
+    get lastLine()                  { return $appData.lastLine; }
+    get firstColumn()               { return $appData.firstColumn; }
+    get lastColumn()                { return $appData.lastColumn; }
 
-    get shapeStartX()       { return $appData.shapeStartX; }
-    get shapeStartY()       { return $appData.shapeStartY; }
-    get shapeMiddleX()      { return $appData.shapeMiddleX; }
-    get shapeMiddleY()      { return $appData.shapeMiddleY; }
+    get shapeStartX()               { return $appData.shapeStartX; }
+    get shapeStartY()               { return $appData.shapeStartY; }
+    get shapeMiddleX()              { return $appData.shapeMiddleX; }
+    get shapeMiddleY()              { return $appData.shapeMiddleY; }
 
-    get numberOfShapes()    {return $appData.numberOfShapes; }
-    get blockArrHeight()    {return $appData.blockArrHeight; }
+    get numberOfShapes()            {return $appData.numberOfShapes; }
+    get blockArrHeight()            {return $appData.blockArrHeight; }
+
+
+    get numberOfDestroyedLinesNow() {return $gameData.numberOfDestroyedLinesNow; }
+    get distroyedLineNowPosY()      {return $gameData.distroyedLineNowPosY; }
+
 
 
     constructor(game, configurations){
@@ -45,12 +54,23 @@ class AppHelper {
         calculateAppData();
     }
 
-    rndColor(){
-        return random('blockColor');
+
+    rndColor()          { return random('blockColor');}
+    rndShape()          { return random('shapes');}
+    rndCamera()         { return random('camera');}
+    rndCameraRotation() { return random('cameraRotation');}
+
+
+    addDistroyedLineInfo(argDistroyedLinePosY){
+        $gameData.numberOfDestroyedLinesNow += 1;
+        $gameData.distroyedLineNowPosY = argDistroyedLinePosY;
+        console.log('number of distroyed line: ' + $gameData.numberOfDestroyedLinesNow);
+        console.log('pos Y of distroyed line: ' + $gameData.distroyedLineNowPosY);
     }
 
-    rndShape(){
-        return random('shapes');
+    resetDistroyedLineInfo(){
+        $gameData.numberOfDestroyedLinesNow = 0;
+        $gameData.distroyedLineNowPosY = 0;
     }
 
 }
@@ -73,6 +93,10 @@ function random(argWhat){
 
         case 'camera':
             tmpRandom = $game.rnd.integerInRange(0, 100);
+        break;
+
+        case 'cameraRotation':
+            tmpRandom = ($game.rnd.integerInRange(0, 10) - 5) / 100;
         break;
 
         default:
