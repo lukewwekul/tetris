@@ -2,7 +2,10 @@
 
 var $game, $appHelper, $key,
     $block, $shape,
-    $focusShapeFL = false, $focusLineFL = false;
+    $focusShapeFL = false, $focusLineFL = false,
+    $cameraRotation = 0.05;
+
+
 
 class CameraController {
 
@@ -16,7 +19,7 @@ class CameraController {
 
     check(){
         cameraMan();
-        if ($focusShapeFL) testCamera();
+        if ($focusShapeFL) focusShape();
         else if($focusLineFL) focusLine();
         else cameraReturn();
     }
@@ -35,7 +38,7 @@ function cameraMan(){
             }
             else break;
         }
-        if (tmpNrOfFEmptyLineBelow > 14) $focusShapeFL = true;
+        if (tmpNrOfFEmptyLineBelow > 14 && !$focusShapeFL) {$focusShapeFL = true; rndRotationCamera();}
         if (tmpNrOfFEmptyLineBelow < 3) {$game.camera.follow($block[$shape.x][$shape.y].cover); $focusShapeFL = false;}
     }
     else $focusShapeFL = false;
@@ -61,6 +64,7 @@ function cameraMan(){
     if ($appHelper.numberOfDestroyedLinesNow>0){
         //console.log('camera distroy more one');
         //shake(0.012, 3000);
+        rndRotationCamera();
         lineCameraAction();
     }
 }
@@ -86,8 +90,11 @@ function zoomIn(argHwMn, argHwFst, argSlowFL){
     if ($game.camera.scale.x < argHwMn){
     $game.camera.scale.x += argHwFst;
     $game.camera.scale.y += argHwFst;
-    if (argSlowFL) $game.time.slowMotion += argHwFst;
-    };
+    }
+    if (argSlowFL) {
+        if ($game.camera.scale.x < argHwMn) $game.time.slowMotion += argHwFst;
+        else $game.time.slowMotion = argHwMn;
+    }
 }
 
 function zoomOut(argHwFst){
@@ -124,7 +131,7 @@ function fallow(argTarget){
 
 
 function focusShape(){
-    rotation(0.05);
+    rotation($cameraRotation);
     shake(0.006, 100);
     zoomIn(3, 0.1, false);
     $game.camera.follow($shape.img);
@@ -144,11 +151,13 @@ function disableFocusLine(){
 }
 
 function focusLine(){
-    rotation(0.05);
+    rotation($cameraRotation);
     zoomIn(2, 0.5, true);
 }
 
-
+function rndRotationCamera(){
+    $cameraRotation = $appHelper.rndCameraRotation();
+}
 
 function cameraReturn(){
     zoomOut(0.1);

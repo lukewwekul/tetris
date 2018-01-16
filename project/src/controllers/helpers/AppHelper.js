@@ -55,13 +55,10 @@ class AppHelper {
     }
 
 
-    rndColor(){
-        return random('blockColor');
-    }
-
-    rndShape(){
-        return random('shapes');
-    }
+    rndColor()          { return random('blockColor');}
+    rndShape()          { return random('shapes');}
+    rndCamera()         { return random('camera');}
+    rndCameraRotation() { return random('cameraRotation');}
 
 
     addDistroyedLineInfo(argDistroyedLinePosY){
@@ -96,6 +93,10 @@ function random(argWhat){
 
         case 'camera':
             tmpRandom = $game.rnd.integerInRange(0, 100);
+        break;
+
+        case 'cameraRotation':
+            tmpRandom = ($game.rnd.integerInRange(0, 10) - 5) / 100;
         break;
 
         default:
