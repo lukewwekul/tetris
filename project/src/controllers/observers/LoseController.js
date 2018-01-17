@@ -28,7 +28,11 @@ function checkDeadLine(argBlock){
         }
     }
 
-    if (tmpGameOverFL) {$game.camera.shake(0.002, 1000); console.log('game over');}
+    if (tmpGameOverFL) {
+        $game.camera.shake(0.001, 1000); console.log('game over');
+        $appHelper.gameOver();
+    }
+
     return tmpGameOverFL;
 }
 

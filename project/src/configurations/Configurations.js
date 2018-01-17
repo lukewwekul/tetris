@@ -4,7 +4,9 @@ var $game,
 //game conf
     game: {
         rangeX: 10,
-        rangeY: 20
+        rangeY: 20,
+        linesToWinFirstLvl: 5,
+        addLinesLvl: 5
     },
 
 //board conf
@@ -28,8 +30,8 @@ var $game,
         rangeY: 5,       //odd number
         fallSpeed: 400,  //ms
         moveSpeed: 150,  //ms, horizontal speed
-        firstLvlSpeed: 1,    //speed shape is fallSpeed/firstLvlSpeed
-        acceleratorSpeedLvl: 0.2 
+        firstLvlSpeed: 1,    //speed shape: fallSpeed/firstLvlSpeed
+        acceleratorSpeedLvl: 0.15
     },
 
 

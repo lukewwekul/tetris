@@ -1,8 +1,9 @@
 
-var $game, $appHelper, $lineDestroy, $block,
+var $game, $appHelper, $lineDestroy, $block, $key,
 
     $lvl, $lines,
-    $destroy = {base: null, exponent: null};
+    $destroy = {base: null, exponent: null},
+    $gameOver = {info1: null, info2: null, info3: null,};
 
 
 
@@ -14,22 +15,27 @@ class InfoController {
         $lineDestroy = lineDestroy;
     }
 
-    make(argBlock){
+    make(argBlock, argKey){
         maker(argBlock);
+        $key = argKey;
     }
 
     check(){
         checkInfo();
+        checkGameOver();
     }
 }
 
 
-function maker(argBlock){
+function maker(argBlock, argKey){
     $block = argBlock;
+    $key = argKey;
     $lvl = makeBitmapText(10, 10, 'lvl ' + $appHelper.lvl, 25);
     $lines = makeBitmapText(15, 40, $appHelper.linesToNextLvl, 25);
     $destroy.base = makeBitmapText(170, 20, '-3', 45);
     $destroy.exponent = makeBitmapText(218, 15, '2', 20);
+
+    gameOverMaker();
 }
 
 
@@ -73,14 +79,18 @@ function winLvl(){
 
 function nextLvl(){
     $appHelper.nextLvl();
-    $appHelper.setLinesToNextLvl(5 + 5*$appHelper.lvl);
+    $appHelper.addLinesToNextLvl();
     $appHelper.addShapeSpeed();
+    refreshHudInfo();
+}
+
+
+function refreshHudInfo(){
     $lvl.text = 'lvl ' + $appHelper.lvl;
     $lvl.alpha = 1;
     $lines.text = $appHelper.linesToNextLvl;
     $lines.alpha = 1;
 }
-
 
 function checkAlpha(){
     oddAlpha($lvl, 0.15, 0.0025);
@@ -94,5 +104,68 @@ function oddAlpha(argObj, argMinAlpha, argOddSpeed){
     else argObj.alpha = argMinAlpha;
 }
 
+
+
+function gameOverMaker(){
+    $gameOver.info1 = makeGameOverBitMapText(170, 'GAME OVER', 40);
+    $gameOver.info2 = makeGameOverBitMapText(225, 'you have reached ' + $appHelper.lvl + ' level', 17);
+    $gameOver.info3 = makeGameOverBitMapText(260, 'and destroyed', 17);
+    $gameOver.info4 = makeGameOverBitMapText(300, 'nice', 30);
+    $gameOver.info5 = makeGameOverBitMapText(340, 'play again ->', 30);
+}
+
+
+function makeGameOverBitMapText(argPosY, argText, argFontSize){
+    var tmpObj = new TextGameOverClass(argPosY, argText, argFontSize);
+    tmpObj.img.alpha = 0;
+    tmpObj.img.anchor.setTo(0.5);
+    tmpObj.img.visible = false;
+    return tmpObj;
+}
+
+function TextGameOverClass(argPosY, argText, argFontSize){
+    this.posX = $game.world.centerX;
+    this.posY = argPosY;
+    this.img = makeBitmapText($game.world.centerX, argPosY, argText, argFontSize);
+}
+
+
+function showGameOverInfo(argFL){
+    for (var i=1; i<6; i++){
+        var tmpName = 'info'+i;
+        if (argFL){
+            if (!$gameOver[tmpName].img.visible) $gameOver[tmpName].img.visible = true;
+            if ($gameOver[tmpName].img.alpha<1) $gameOver[tmpName].img.alpha += 0.025;
+        }
+        else if($gameOver[tmpName].img.visible){
+            if ($gameOver[tmpName].img.alpha>0) $gameOver[tmpName].img.alpha -= 0.05;
+            else $gameOver[tmpName].img.visible = false;
+        }
+    }
+    return argFL;
+}
+
+function checkGameOver(){
+    if (showGameOverInfo($appHelper.gameOverFL)) {
+        setGameOverInfo();
+        if ($key.Right.isDown || $key.D.isDown){
+            $lineDestroy.destroyAll($block);
+            $appHelper.resetGame();
+            refreshHudInfo();
+        }
+    }
+}
+
+
+function setGameOverInfo(){
+    $gameOver.info2.img.text =  'you have reached '
+                                + $appHelper.lvl
+                                + ' level';
+
+    $gameOver.info3.img.text =  'and destroyed '
+                                + $appHelper.numberOfDestroyedLinesAllGame * $appHelper.rangeX
+                                + ' blocks';
+
+}
 
 module.exports = InfoController;

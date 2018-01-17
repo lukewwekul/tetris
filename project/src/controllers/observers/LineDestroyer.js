@@ -53,7 +53,7 @@ function distroyLine(argBlock, argY){
 
 
 function destroyAllLines(argBlock){
-    for (var j=$appHelper.firstLine; j<$appHelper.lastLine+1; j++){
+    for (var j=$appHelper.firstLine; j<$appHelper.blockArrHeight; j++){
         for (var i=$appHelper.firstColumn; i<$appHelper.lastColumn+1; i++){
             if (argBlock[i][j].cover.frame) {
                 argBlock[i][j].particle.makeParticles('blocks', argBlock[i][j].coverNr);

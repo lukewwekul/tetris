@@ -55,7 +55,7 @@ class BoardController {
         $shapeCtrl.make($inputMaker.key);
 
         $cameraCtrl = new CameraController($game, $appHelper, $inputMaker.key, $block, $shape);
-        $infoCtrl.make($block);
+        $infoCtrl.make($block, $inputMaker.key);
     }
 
     check(){
