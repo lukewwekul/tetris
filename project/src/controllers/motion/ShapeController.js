@@ -80,7 +80,7 @@ function checkInput(argShape, argBlock){
 
     if ($key.Down.isDown || $key.S.isDown){
         argShape.moveY.timeScale = 5;
-    } else {argShape.moveY.timeScale = 1;}
+    } else {argShape.moveY.timeScale = $appHelper.shapeSpeed;}
 
 
     if ($key.Up.isDown || $key.W.isDown){

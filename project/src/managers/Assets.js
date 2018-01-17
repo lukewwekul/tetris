@@ -1,6 +1,6 @@
 var Configurations = require('../configurations/Configurations');
 
-var $game, $mode, $path, $pathAudio, $configurations, $conf;
+var $game, $mode, $path, $pathAudio, $pathFont, $configurations, $conf;
 
 class Assets {
 
@@ -22,10 +22,11 @@ class Assets {
 
         $pathAudio = 'ats/aud';     //audio path
 
+        $pathFont = 'ats/fnt';      //font path
+
     }
 
-    loadImage(name)
-    {
+    loadImage(name){
         $game.load.image(name, $path + '/' + name + '.png');
     }
 
@@ -33,22 +34,28 @@ class Assets {
         $game.load.atlas(name, $path + '/' + name + '.png', $path + '/' + name + '.json');
     }
 
-    loadAudio(name)
-    {
+    loadAudio(name){
         $game.load.audio(name, $pathAudio + '/' + name  + `.mp3`);
+    }
+
+    loadFont(name){
+        $game.load.bitmapFont(name, $pathFont + '/' + name  + `.png`, $pathFont + '/' + name  + `.xml`);
     }
 
     loadAssets(){
         this.initialize();
 
         //load image
-        //this.loadImage('board');
+        //this.loadImage('KNIGHT3');
 
         //load atlas
         this.loadAtlas('blocks');
 
         //load audio
         //this.loadAudio('melody');
+
+        //load font
+        this.loadFont('nokia');
     }
 
 

@@ -18,8 +18,9 @@ class Play {
 
 
     create(){
+        $game.camera.flash(0x191919, 1250);
         console.log('play ...');
-        $game.time.advancedTiming = true;
+        //$game.time.advancedTiming = true;
         $boardCtrl.make();
         //$game.camera.bounds.x = -200;
         //$game.camera.bounds.y = -200;
@@ -40,7 +41,7 @@ class Play {
 
 
     render() {
-	$game.debug.text($game.time.fps + ' fps', 2, 14, "#00ff00");
+	//$game.debug.text($game.time.fps + ' fps', 2, 14, "#00ff00");
     /*$game.debug.text('game camera pos ' + $game.camera.x + ', ' + $game.camera.y, 2, 34, "#00ff00");
     $game.debug.text('game scale ' + $game.camera.scale.x + ', ' + $game.camera.scale.y, 2, 54, "#00ff00");
     $game.debug.text('game bounds ' + $game.camera.bounds.x + ', ' + $game.camera.bounds.y, 2, 74, "#00ff00");

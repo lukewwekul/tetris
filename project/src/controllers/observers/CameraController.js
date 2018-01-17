@@ -38,8 +38,10 @@ function cameraMan(){
             }
             else break;
         }
-        if (tmpNrOfFEmptyLineBelow > 14 && !$focusShapeFL) {$focusShapeFL = true; rndRotationCamera();}
-        if (tmpNrOfFEmptyLineBelow < 3) {$game.camera.follow($block[$shape.x][$shape.y].cover); $focusShapeFL = false;}
+        if (tmpNrOfFEmptyLineBelow > 14 && !$focusShapeFL) {
+            $focusShapeFL = true; rndRotationCamera();
+        }
+        if ($focusShapeFL && tmpNrOfFEmptyLineBelow < 3) {$game.camera.follow($block[$shape.x][$shape.y].cover); $focusShapeFL = false;}
     }
     else $focusShapeFL = false;
 
@@ -64,8 +66,10 @@ function cameraMan(){
     if ($appHelper.numberOfDestroyedLinesNow>0){
         //console.log('camera distroy more one');
         //shake(0.012, 3000);
-        rndRotationCamera();
-        lineCameraAction();
+        if ($appHelper.rndCamera()<$appHelper.numberOfDestroyedLinesNow*25){
+            rndRotationCamera();
+            lineCameraAction();
+        }
     }
 }
 
@@ -91,10 +95,11 @@ function zoomIn(argHwMn, argHwFst, argSlowFL){
     $game.camera.scale.x += argHwFst;
     $game.camera.scale.y += argHwFst;
     }
-    if (argSlowFL) {
-        if ($game.camera.scale.x < argHwMn) $game.time.slowMotion += argHwFst;
-        else $game.time.slowMotion = argHwMn;
-    }
+    if (argSlowFL || $focusLineFL) {
+        //if ($game.camera.scale.x < argHwMn) $game.time.slowMotion += argHwFst;
+        //else $game.time.slowMotion = argHwMn;
+        $game.time.slowMotion = argHwMn;
+    } else $game.time.slowMotion = 1;
 }
 
 function zoomOut(argHwFst){
@@ -141,7 +146,7 @@ function focusShape(){
 
 
 function lineCameraAction(){
-    $game.camera.follow($block[6][$appHelper.distroyedLineNowPosY].cover);
+    $game.camera.follow($block[$appHelper.middleArrX][$appHelper.distroyedLineNowPosY].cover);
     $focusLineFL = true;
     $game.time.events.add(1500, disableFocusLine);
 }

@@ -7,7 +7,7 @@ var $game, $boot, $loader, $play;
 class AppController {
 
     constructor(id){
-        $game = new Phaser.Game(238, 459, Phaser.AUTO, id, this, false);
+        $game = new Phaser.Game(238, 459, Phaser.AUTO, id, this, true);
         $boot = new Boot($game);
         $loader = new Loader($game);
         $play = new Play($game);
