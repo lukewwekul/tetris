@@ -115,6 +115,7 @@ function gameOverMaker(){
     $gameOver.info6 = makeGameOverBitMapText(340, '->', 30);
     $gameOver.info6.img.x = 215;
     $gameOver.info6.img.angle = 90;
+    $gameOver.info7 = makeGameOverBitMapText(360, '(press S or DOWN arrow)', 15);
 
 }
 
@@ -135,7 +136,7 @@ function TextGameOverClass(argPosY, argText, argFontSize){
 
 
 function showGameOverInfo(argFL){
-    for (var i=1; i<7; i++){
+    for (var i=1; i<8; i++){
         var tmpName = 'info'+i;
         if (argFL){
             if (!$gameOver[tmpName].img.visible) $gameOver[tmpName].img.visible = true;
@@ -148,6 +149,7 @@ function showGameOverInfo(argFL){
     }
     return argFL;
 }
+
 
 function checkGameOver(){
     if (showGameOverInfo($appHelper.gameOverFL)) {
