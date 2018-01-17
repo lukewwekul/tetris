@@ -1,5 +1,5 @@
 
-var $game, $appHelper, $key,
+var $game, $appHelper, $key, $lineDestroy,
 
     $title, $orTxt, $AWSD, $arrows,
     $disappearIntroFL = false;
@@ -8,9 +8,10 @@ var $game, $appHelper, $key,
 
 class IntroController {
 
-    constructor(game, appHelper){
+    constructor(game, appHelper, lineDestroy){
         $game = game;
         $appHelper = appHelper;
+        $lineDestroy = lineDestroy;
     }
 
     make(argBlock, argKey){
@@ -18,9 +19,9 @@ class IntroController {
         $key = argKey;
     }
 
-    check(){
+    check(argBlock){
         if ($disappearIntroFL) disappearIntro();
-        else checkPressKey();
+        else checkPressKey(argBlock);
     }
 }
 
@@ -85,9 +86,10 @@ function disappear(argObj, argDisappearSpeed){
 }
 
 
-function checkPressKey(){
+function checkPressKey(argBlock){
     if ($key.Left.isDown || $key.A.isDown || $key.Up.isDown ||$key.W.isDown ||
         $key.Down.isDown || $key.S.isDown || $key.Right.isDown ||$key.D.isDown){
+            $lineDestroy.destroyAll(argBlock);
             $disappearIntroFL = true;
             $appHelper.resetGame();
         }

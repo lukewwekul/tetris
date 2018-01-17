@@ -12,7 +12,7 @@ var Configurations  = require('../configurations/Configurations'),
     LoseController  = require('./observers/LoseController'),
     CameraController = require('./observers/CameraController'),
 
-    InfoController = require('./info/InfoController'),
+    InfoAndLvlController = require('./info/InfoAndLvlController'),
     IntroController = require('./info/IntroController');
 
 var $game,
@@ -21,7 +21,7 @@ var $game,
     $lineCtrl, $inputMaker,
     $shapeCtrl,
     $lineDestroy, $loseCtrl,
-    $cameraCtrl, $infoCtrl, $introCtrl,
+    $cameraCtrl, $infoAndLvlCtrl, $introCtrl,
     $block, $shape;
 
 
@@ -42,8 +42,8 @@ class BoardController {
         $lineDestroy    = new LineDestroyer($game, $appHelper);
         $loseCtrl       = new LoseController($game, $appHelper);
 
-        $infoCtrl       = new InfoController($game, $appHelper, $lineDestroy);
-        $introCtrl       = new IntroController($game, $appHelper);
+        $infoAndLvlCtrl = new InfoAndLvlController($game, $appHelper, $lineDestroy);
+        $introCtrl      = new IntroController($game, $appHelper, $lineDestroy);
     }
 
     make(){
@@ -58,7 +58,7 @@ class BoardController {
 
         $cameraCtrl = new CameraController($game, $appHelper, $inputMaker.key, $block, $shape);
 
-        $infoCtrl.make($block, $inputMaker.key);
+        $infoAndLvlCtrl.make($block, $inputMaker.key);
         $introCtrl.make($block, $inputMaker.key);
     }
 
@@ -69,8 +69,8 @@ class BoardController {
         $loseCtrl.check($block);
 
         $cameraCtrl.check();
-        $infoCtrl.check();
-        $introCtrl.check();
+        $infoAndLvlCtrl.check();
+        $introCtrl.check($block);
     }
 }
 

@@ -7,7 +7,7 @@ var $game, $appHelper, $lineDestroy, $block, $key,
 
 
 
-class InfoController {
+class InfoAndLvlController {
 
     constructor(game, appHelper, lineDestroy){
         $game = game;
@@ -170,6 +170,22 @@ function setGameOverInfo(){
                                 + $appHelper.numberOfDestroyedLinesAllGame * $appHelper.rangeX
                                 + ' blocks';
 
+    $gameOver.info4.img.text = compliment();
 }
 
-module.exports = InfoController;
+
+function compliment(){
+    var tmpCompliment = '';
+    if ($appHelper.lvl > 12) tmpCompliment = 'magnificent';
+    else if ($appHelper.lvl > 10) tmpCompliment = 'wonderful';
+    else if ($appHelper.lvl > 8) tmpCompliment = 'super';
+    else if ($appHelper.lvl > 6) tmpCompliment = 'cool';
+    else if ($appHelper.lvl > 4) tmpCompliment = 'nice';
+    else if ($appHelper.lvl > 2) tmpCompliment = 'not bad';
+    else tmpCompliment = 'be better';
+
+    return tmpCompliment;
+}
+
+
+module.exports = InfoAndLvlController;
