@@ -188,7 +188,8 @@ function calculateAppData(){
     $appData.middleArrX = Math.floor(($conf.game.rangeX + 2*Math.floor($conf.shape.rangeX/2))/2);
     $appData.rangeX = $conf.game.rangeX;
 
-    $gameData.shapeSpeed = $conf.shape.firstLvlSpeed;
+    //$gameData.shapeSpeed = $conf.shape.firstLvlSpeed;
+    $gameData.shapeSpeed = 0.1;
 
     $gameData.linesToWinFirstLvl = $conf.game.linesToWinFirstLvl;
     $gameData.linesToNextLvl = $conf.game.linesToWinFirstLvl;
