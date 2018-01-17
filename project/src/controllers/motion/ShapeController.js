@@ -299,9 +299,6 @@ function resetShape(argShape){
     argShape.img.rotation = argShape.rotateAngle;
     argShape.moveXFL = false;
     argShape.moveX.stop();
-
-    //argShape.moveYFL = false;
-    //argShape.moveY = $game.add.tween(argShape.img);
 }
 
 

@@ -17,10 +17,6 @@ class AppController {
         $game.state.add('Boot', $boot);
         $game.state.add('Loader', $loader);
         $game.state.add('Play', $play);
-
-        //$game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-        //$game.input.maxPointers = 1;
-        //$game.stage.disapleVisibilityChange = true;
     }
 
     create(){

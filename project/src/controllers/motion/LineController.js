@@ -35,13 +35,9 @@ function calculateBoardArea(){
     $lastLine = $conf.game.rangeY + $firstLine - 1;
     $firstColumn = Math.floor($conf.shape.rangeX/2);
     $lastColumn = $conf.game.rangeX + $firstColumn;
-    /*$firstLine = $appHelper.firstLine;
-    $lastLine = $appHelper.lastLine;
-    $firstColumn =$appHelper.firstColumn;
-    $lastColumn = $appHelper.lastColumn;*/
-    //console.log('calculateBoardArea, firstLine: ' + $firstLine + ', lastLine: ' + $lastLine);
+
     tmpAllLinesBlocks = $conf.shape.rangeY + Math.floor($conf.shape.rangeY*1.5);
-    //tmpAllLinesBlocks = $appHelper.blockArrHeight;
+
     for (var i=0; i<tmpAllLinesBlocks; i++){
         $line[i] = 0;
     }
@@ -89,19 +85,18 @@ function dumpAboveLine(argArr){
 function dump(argDownLine, argUpLine, argArr){
     for (var i=$firstColumn; i<$lastColumn; i++){
         argArr[i][argDownLine].coverNr = argArr[i][argUpLine].coverNr;
-        //argArr[i][argDownLine].cover.x = argArr[i][argUpLine].cover.x;
+
         argArr[i][argDownLine].cover.y = argArr[i][argUpLine].cover.y;
 
-        //console.log('cover down Y: ' + argArr[i][argDownLine].cover.y + '. cover up Y: ' + argArr[i][argUpLine].cover.y);
+
         argArr[i][argDownLine].cover.frame = argArr[i][argDownLine].coverNr;
         argArr[i][argDownLine].dumpRange = argUpLine - argDownLine;
-        //console.log('dump range: ' + argArr[i][argDownLine].dumpRange);
+
 
         argArr[i][argUpLine].coverNr = 0;
         argArr[i][argUpLine].cover.frame = argArr[i][argUpLine].coverNr;
 
-        //$game.world.bringToTop(argArr[i][argDownLine].cover);
-        //$game.world.bringToTop(argArr[i][argDownLine].particle);
+
         //console.log('time fall: ' + $tmpTimeFall);
         argArr[i][argDownLine].moveY = $game.add.tween(argArr[i][argDownLine].cover);
         argArr[i][argDownLine].moveY.to({y: argArr[i][argDownLine].posY}, $tmpTimeFall, Phaser.Easing.Cubic.In);

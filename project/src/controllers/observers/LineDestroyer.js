@@ -42,11 +42,8 @@ function checkFullLine(argBlock){
 function distroyLine(argBlock, argY){
     for (var k=$appHelper.firstColumn; k<$appHelper.lastColumn+1; k++){
         argBlock[k][argY].particle.makeParticles('blocks', argBlock[k][argY].coverNr);
-        //argBlock[k][argY].particle.frame = argBlock[k][argY].coverNr;
         argBlock[k][argY].coverNr = 0;
-        argBlock[k][argY].cover.frame = argBlock[k][argY].coverNr;
-        //$game.world.bringToTop(argBlock[k][argY].particle);
-        //argBlock[k][argY].particle.frame = 7;
+        argBlock[k][argY].cover.frame = argBlock[k][argY].coverNr;        
         argBlock[k][argY].particle.start(true, 3000, null, 1);
     }
 }

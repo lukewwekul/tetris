@@ -35,8 +35,7 @@ function makeParticle(){
     $emitter.makeParticles('infoAtlas', 'liveHeartInfo.png');
     $emitter.gravity = 450;
     $emitter.setAlpha(1, 0, 1500);
-
-    //$game.input.onDown.add(particleBurst, this);
+    
 }
 
 function makeParticleToys(hwMnArg){

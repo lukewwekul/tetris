@@ -40,7 +40,6 @@ function makeBlocks(){
 
     hideUnusedBlocks(tmpArr);
 
-    //testPutRandomBlocksOnBoard(tmpArr, 10); //tmp
 
     return tmpArr;
 }
@@ -62,7 +61,7 @@ function BlockClass(argX, argY, argPosX, argPosY){
     this.particle = $game.add.emitter(argPosX, argPosY, 1);
     this.particle.makeParticles('blocks', 4);
     this.particle.gravity = 200;
-    //this.particle.setAlpha(1, 0, 2000);
+
 
     $game.world.sendToBack(this.cover);
     $game.world.sendToBack(this.bottom);

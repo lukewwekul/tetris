@@ -92,12 +92,14 @@ function refreshHudInfo(){
     $lines.alpha = 1;
 }
 
+
 function checkAlpha(){
     oddAlpha($lvl, 0.15, 0.0025);
     oddAlpha($lines, 0.15, 0.01);
     oddAlpha($destroy.base, 0, 0.005);
     oddAlpha($destroy.exponent, 0, 0.005);
 }
+
 
 function oddAlpha(argObj, argMinAlpha, argOddSpeed){
     if (argObj.alpha > argMinAlpha) argObj.alpha -= argOddSpeed;

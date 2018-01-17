@@ -12,7 +12,6 @@ class Boot {
 
     create(){
         console.log('boot ...');
-        //$game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         $game.state.start('Loader');
     }
 

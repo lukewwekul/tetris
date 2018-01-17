@@ -74,21 +74,6 @@ function cameraMan(){
 }
 
 
-function testCamera(){
-    focusShape();
-
-    /*$game.camera.scale.x += 0.0006;
-    $game.camera.scale.y += 0.0006;*/
-    //$game.camera.bounds.x = -120;
-    //$game.camera.bounds.y = 70;
-    //$game.camera.scale.x = 3;
-    //$game.camera.scale.y = 3;
-    //$game.time.slowMotion = 1;
-
-    //$game.camera.follow($block[7][11].bottom);
-    //$game.camera.follow($shape.shape.img);
-}
-
 
 function zoomIn(argHwMn, argHwFst, argSlowFL){
     if ($game.camera.scale.x < argHwMn){
@@ -167,7 +152,6 @@ function rndRotationCamera(){
 function cameraReturn(){
     zoomOut(0.1);
     rotationReturn(0.005, false);
-    //$game.world.rotation = 0;
 }
 
 

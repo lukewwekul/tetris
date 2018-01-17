@@ -1,8 +1,6 @@
-//var Shapes = require('../../Configurations/Shapes');
 
 var $game, $assets, $conf,
     $appHelper,
-    //$shapes,
     $shapesList, $shapesListRotates;
 
 class ShapeMaker {
@@ -12,7 +10,6 @@ class ShapeMaker {
         $assets = assets;
         $conf = $assets.settings;
         $appHelper = appHelper;
-        //$shapes = new Shapes();
         $shapesList = $appHelper.shapesList;
         $shapesListRotates = $appHelper.shapesListRotates;
     }
@@ -60,9 +57,7 @@ function ShapeClass(argX, argY, argPosX, argPosY){
     this.img = $game.add.group();
     this.img.centerX = this.posX;
     this.img.centerY = this.posY;
-    //this.block = this.img.create(0, 0, 'blocks', 'block_red.png');
-    //this.block.frame = this.colorIndex;
-    //this.block.anchor.setTo(0.5);
+    
 
     this.shape = [];
     this.shapes = $appHelper.shapesListRotates;
