@@ -95,11 +95,11 @@ function zoomIn(argHwMn, argHwFst, argSlowFL){
     $game.camera.scale.x += argHwFst;
     $game.camera.scale.y += argHwFst;
     }
-    if (argSlowFL) {
+    if (argSlowFL || $focusLineFL) {
         //if ($game.camera.scale.x < argHwMn) $game.time.slowMotion += argHwFst;
         //else $game.time.slowMotion = argHwMn;
         $game.time.slowMotion = argHwMn;
-    }
+    } else $game.time.slowMotion = 1;
 }
 
 function zoomOut(argHwFst){
