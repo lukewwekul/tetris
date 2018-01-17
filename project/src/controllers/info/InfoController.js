@@ -111,7 +111,11 @@ function gameOverMaker(){
     $gameOver.info2 = makeGameOverBitMapText(225, 'you have reached ' + $appHelper.lvl + ' level', 17);
     $gameOver.info3 = makeGameOverBitMapText(260, 'and destroyed', 17);
     $gameOver.info4 = makeGameOverBitMapText(300, 'nice', 30);
-    $gameOver.info5 = makeGameOverBitMapText(340, 'play again ->', 30);
+    $gameOver.info5 = makeGameOverBitMapText(340, 'play again', 30);
+    $gameOver.info6 = makeGameOverBitMapText(340, '->', 30);
+    $gameOver.info6.img.x = 215;
+    $gameOver.info6.img.angle = 90;
+
 }
 
 
@@ -131,7 +135,7 @@ function TextGameOverClass(argPosY, argText, argFontSize){
 
 
 function showGameOverInfo(argFL){
-    for (var i=1; i<6; i++){
+    for (var i=1; i<7; i++){
         var tmpName = 'info'+i;
         if (argFL){
             if (!$gameOver[tmpName].img.visible) $gameOver[tmpName].img.visible = true;
@@ -148,7 +152,7 @@ function showGameOverInfo(argFL){
 function checkGameOver(){
     if (showGameOverInfo($appHelper.gameOverFL)) {
         setGameOverInfo();
-        if ($key.Right.isDown || $key.D.isDown){
+        if (($key.Down.isDown || $key.S.isDown)&&$gameOver.info1.img.alpha>0.99){
             $lineDestroy.destroyAll($block);
             $appHelper.resetGame();
             refreshHudInfo();
